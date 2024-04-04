@@ -5,7 +5,7 @@ import {
     LocalUser,
     RemoteUser,
     useJoin,
-    useLocalCameraTrack,
+//     useLocalCameraTrack,
     useLocalMicrophoneTrack,
     usePublish,
     useRemoteAudioTracks,
