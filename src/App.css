@@ -81,9 +81,8 @@ body {
 #localVideo {
   width: 50vw;
   aspect-ratio: 16/9;
-  max-width: 480px;
-  min-width: 360px;
-  position: fixed;
+  max-width: "50%";
+  min-width: "30%";
   right: 25px;
   bottom: 25px;
   margin: 0;
@@ -104,4 +103,27 @@ body {
   max-width: 720px;
   min-width: 360px;
   overflow: hidden;
+}
+
+.connect-button {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.connect-button:hover {
+  background-color: #45a049;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
 }

@@ -66,7 +66,7 @@ export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
             setInvalidInputMsg('') // clear the error message
           }}
         /> */}
-         {  !isLoading && <button onClick={handleConnect}>Connect Now</button> }
+         {  !isLoading && <button className="connect-button" onClick={handleConnect}>Connect Now</button> }
         {/* { invalidInputMsg && <p style={{color: 'red'}}> {invalidInputMsg} </p>} */}
       </div>
      </>
