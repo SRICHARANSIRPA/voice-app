@@ -13,14 +13,14 @@ function App() {
   const navigate = useNavigate()
   const agoraClient = useRTCClient( AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })); // Initialize Agora Client
 
-  const handleConnect = (channelName: string) => {
-    navigate(`/via/${channelName}`) // on form submit, navigate to new route
+  const handleConnect = (channelName: string, uid: string) => {
+    navigate(`/via/${channelName}/${uid}`) // on form submit, navigate to new route
   }
 
   return (
     <Routes>
       <Route path='/' element={ <ConnectForm connectToVideo={ handleConnect } /> } />
-      <Route path='/via/:channelName' element={
+      <Route path='/via/:channelName/:uid' element={
         <AgoraRTCProvider client={agoraClient}>
           <LiveVideo />
         </AgoraRTCProvider>
