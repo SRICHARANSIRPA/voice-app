@@ -8,10 +8,18 @@ import AgoraRTC, {
 } from "agora-rtc-react";
 
 import './App.css'
+import { useEffect } from 'react';
 
 function App() {
   const navigate = useNavigate()
   const agoraClient = useRTCClient( AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })); // Initialize Agora Client
+
+
+  useEffect(()=> {
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
+    .then(res => res.json())
+    .then(data => console.log("DATA",data))
+  })
 
   const handleConnect = (channelName: string, uid: string) => {
     navigate(`/via/${channelName}/${uid}`) // on form submit, navigate to new route
