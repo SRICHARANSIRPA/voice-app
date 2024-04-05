@@ -2,12 +2,13 @@ import { useState } from 'react'
 import logo from './assets/react.svg'
 
 interface ConnectFormProps {
-  connectToVideo: (channelName: string) => void
+  connectToVideo: (channelName: string,uid: string) => void
 }
 
 export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
 
   const [channelName, setChannelName] = useState('')
+  const [uid, setUid] = useState('')
   const [invalidInputMsg, setInvalidInputMsg] = useState('')
 
 
@@ -23,7 +24,7 @@ export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
       return;
     } 
   
-    connectToVideo(trimmedChannelName)
+    connectToVideo(trimmedChannelName,uid)
   }
 
   return (
@@ -37,6 +38,16 @@ export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
           value={channelName}
           onChange={(e) => {
             setChannelName(e.target.value)
+            setInvalidInputMsg('') // clear the error message
+          }}
+        />
+        <input 
+          id="UID"
+          type='text'
+          placeholder='UID'
+          value={uid}
+          onChange={(e) => {
+            setUid(e.target.value)
             setInvalidInputMsg('') // clear the error message
           }}
         />
