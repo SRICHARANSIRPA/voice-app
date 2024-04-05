@@ -17,7 +17,7 @@ export const LiveVideo = () => {
 
   const appId = 'e7f6e9aeecf14b2ba10e3f40be9f56e7'
   // const agoraEngine = useRTCClient( AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })); // Initialize Agora Client
-  const { channelName,uid } = useParams() //pull the channel name from the param
+  const { channelName, uid } = useParams() //pull the channel name from the param
 
   // set the connection state
   const [activeConnection, setActiveConnection] = useState(true);
@@ -39,7 +39,7 @@ export const LiveVideo = () => {
       appid: appId,
       channel: channelName!,
       token: null,
-      uid: uid
+      uid: parseInt(uid || '')
     },
     activeConnection,
   );
