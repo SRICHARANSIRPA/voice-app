@@ -33,6 +33,13 @@ body {
   width: 50vw;
   max-width: 500px;
 }
+#UID {
+  display: block;
+  padding: 15px;
+  margin: 0 0 25px;
+  width: 50vw;
+  max-width: 500px;
+}
 
 .card button:hover {
   border-color: #099DFD;
