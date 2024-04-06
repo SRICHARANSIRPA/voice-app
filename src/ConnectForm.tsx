@@ -1,40 +1,86 @@
 import { useState } from 'react'
 import CallLoading from './CallLoading'
-import { Button } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
+import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 
-interface ConnectFormProps {
-  connectToVideo: (channelName: string, uid: number) => void
-}
+const popupCenter = ({ url, title, w, h }) => {
+  // Fixes dual-screen position
+  let dualScreenLeft = window.screenLeft;
+  if (dualScreenLeft === undefined) {
+      dualScreenLeft = window.screenX;
+  }
+  let dualScreenTop = window.screenTop;
+  if (dualScreenTop === undefined) {
+      dualScreenTop = window.screenY;
+  }
 
-export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
+  let width = window.innerWidth;
+  if (!width) {
+      width = document.documentElement.clientWidth;
+      if (!width) {
+          width = screen.width;
+      }
+  }
+  
+  let height = window.innerHeight;
+  if (!height) {
+      height = document.documentElement.clientHeight;
+      if (!height) {
+          height = screen.height;
+      }
+  }
 
-  // const [channelName, setChannelName] = useState('')
-  // const [uid, setUid] = useState('')
+  const systemZoom = width / window.screen.availWidth;
+  const left = (width - w) / 2 / systemZoom + dualScreenLeft;
+  const top = (height - h) / 2 / systemZoom + dualScreenTop;
+  const newWindow = window.open(
+      url,
+      title,
+      `
+    scrollbars=yes,
+    width=${w / systemZoom}, 
+    height=${h / systemZoom}, 
+    top=${top}, 
+    left=${left},
+    resizable=no,
+    `,
+
+  );
+  
+      newWindow.focus();
+  
+};
+
+
+export const ConnectForm = () => {
+
+  const [callIP, setCallIP] = useState(false)
   const [isLoading, setLoader] = useState(false)
-  // const [invalidInputMsg, setInvalidInputMsg] = useState('')
 
   const handleConnect = () => {
-    // trim spaces
     setLoader(true)
-    // const trimmedChannelName = channelName.trim()
-    
-    // // validate input: make sure channelName is not empty
-    // if (trimmedChannelName === '') {
-    //   e.preventDefault() // keep the page from reloading on form submission
-    //   setInvalidInputMsg("Channel name can't be empty.") // show warning
-    //   setChannelName('') // resets channel name value in case user entered blank spaces 
-    //   return;
-    // } 
 
-    // const connectionParam = {
-    //   "chanelName":"test",
-    //   "uid":12134
-    // }
+    const connectionParam = {
+      chanelName: "test1",
+      uid: "1244"
+    }
 
-    // setTimeout(()=> {
-    //   setLoader(false)
-    //   connectToVideo(connectionParam.chanelName, connectionParam.uid)
-    // }, 4000)
+  //   fetch("https://kapdemo.kapturecrm.com/ms/kreport/noauth/get-call-detail")
+  //   .then(res => res.json())
+  //   .then(connectionParam => 
+  // connectionParam
+  //   )
+
+    setTimeout(()=> {
+      setLoader(false)
+      setCallIP(true)
+     
+      popupCenter({url: `http://localhost:5173/via/${connectionParam.chanelName}/${connectionParam.uid}`, title: "KapCall - Real Time", w: 650, h: 500})
+
+     location.href = `https://webdemo.agora.io/basicVoiceCall/index.html?appid=3ce727a4f57d44ee889bf40e79e4ea5a&channel=${connectionParam.chanelName}&uid=${connectionParam.uid}`
+      
+  
+    }, 4000)
 
 
   }
@@ -42,30 +88,17 @@ export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
   return (
     <>
       {  isLoading &&  <CallLoading /> }
+   
       <div className="card">
-        {/* <input 
-          id="channelName"
-          type='text'
-          placeholder='Channel Name'
-          value={channelName}
-          onChange={(e) => {
-            setChannelName(e.target.value)
-            setInvalidInputMsg('') // clear the error message
-          }}
-        />
-        <input 
-          id="UID"
-          type='text'
-          placeholder='UID'
-          value={uid}
-          onChange={(e) => {
-            setUid(e.target.value)
-            setInvalidInputMsg('') // clear the error message
-          }}
-        /> */}
-         {  !isLoading && <Button variant="contained" color="success" onClick={handleConnect}>Connect Now</Button> }
-        {/* { invalidInputMsg && <p style={{color: 'red'}}> {invalidInputMsg} </p>} */}
+           <Tooltip title="Start Call" >
+                {  !isLoading && !callIP && 
+                        <IconButton className="connect-button-call" color="success" onClick={handleConnect}>
+                          <AddIcCallIcon fontSize='small'/>
+                        </IconButton> 
+                }
+          </Tooltip>
       </div>
+    
      </>
   )
 }

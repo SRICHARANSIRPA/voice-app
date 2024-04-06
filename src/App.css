@@ -8,7 +8,6 @@ body {
   padding: 2rem;
   text-align: center;
   height: 100vh;
-  padding-top: 20vh;
 }
 
 .card {
@@ -35,11 +34,6 @@ body {
   margin: 0 0 25px;
   width: 50vw;
   max-width: 500px;
-}
-
-.card button:hover {
-  border-color: #099DFD;
-  background-color: #099DFD;
 }
 
 #controlsToolbar {
@@ -130,5 +124,17 @@ body {
   text-transform: capitalize !important;
   font-size: 13px !important;
   font-weight: 700 !important;
+}
+
+.connect-button-call {
+  background: rgb(58,114,180);
+  background: -moz-linear-gradient(90deg, rgba(58,114,180,1) 0%, rgba(29,184,253,1) 50%, rgba(69,149,252,1) 100%);
+  background: -webkit-linear-gradient(90deg, rgba(58,114,180,1) 0%, rgba(29,184,253,1) 50%, rgba(69,149,252,1) 100%);
+  background: linear-gradient(90deg, rgba(58,114,180,1) 0%, rgba(29,184,253,1) 50%, rgba(69,149,252,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3a72b4",endColorstr="#4595fc",GradientType=1);
+  color: #ffffff !important;
+  padding: 13px !important;
+  border: none !important;
+  outline: none !important;
 }
 

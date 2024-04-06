@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ConversationIcon from './ConversationIcon'
 import CallEndIcon from '@mui/icons-material/CallEnd';
 
-// import MicIcon from '@mui/icons-material/Mic';
+import MicIcon from '@mui/icons-material/Mic';
 
 import {
     // LocalUser,
@@ -15,7 +15,7 @@ import {
     useRemoteAudioTracks,
     useRemoteUsers,
   } from "agora-rtc-react";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 
 
 export const LiveVideo = () => {
@@ -35,8 +35,7 @@ export const LiveVideo = () => {
   const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
 //   const { localCameraTrack } = useLocalCameraTrack(cameraOn);
 
-  // to leave the call
-  const navigate = useNavigate()
+  
 
   // Join the channel
   useJoin(
@@ -60,6 +59,12 @@ export const LiveVideo = () => {
 
   
   const handleCloseWindow = () => {
+    // fetch("https://kapdemo.kapturecrm.com/ms/kreport/noauth/get-call-detail")
+    // .then(res => res.json())
+    // .then(connectionParam => 
+    //   connectionParam
+    // )
+    setActiveConnection(false)
     window.close()
   }
 
@@ -78,7 +83,11 @@ export const LiveVideo = () => {
       
          <ConversationIcon />
 
-         
+         <div id="mediaControls">
+              <IconButton style={localMicrophoneTrack ? {color: "#139905", outline: "none"} :  {color: "#959595", outline: "none"}} onClick={() => setMic(a => !a)}>
+                <MicIcon />
+              </IconButton>
+         </div>
       {/* <div id='localVideo'>
         <LocalUser
           audioTrack={localMicrophoneTrack}
@@ -107,9 +116,7 @@ export const LiveVideo = () => {
       </div> */}
       <div className="disconnect-button-wrapper">
             <Button variant="contained" className="disconnect-button" color="error"
-                onClick={() => {
-                  handleCloseWindow()
-                }}>
+                onClick={() => { handleCloseWindow() }}>
                 <CallEndIcon style={{paddingRight: "10px"}} />
                 Disconnect
             </Button>
