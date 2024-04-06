@@ -3,7 +3,7 @@ import CallLoading from './CallLoading'
 import { IconButton, Tooltip } from '@mui/material'
 import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 
-const popupCenter = ({ url, title, w, h }) => {
+const popupCenter = ({ url, title, w, h } : { url: string, title: string, w: number, h: number }) => {
   // Fixes dual-screen position
   let dualScreenLeft = window.screenLeft;
   if (dualScreenLeft === undefined) {
@@ -47,40 +47,44 @@ const popupCenter = ({ url, title, w, h }) => {
 
   );
   
+  if (newWindow) {
       newWindow.focus();
+  } else {
+      // Handle case where window.open returns null
+      console.error('Popup window blocked or failed to open.');
+  }
   
 };
 
 
 export const ConnectForm = () => {
 
-  const [callIP, setCallIP] = useState(false)
+  // const [callIP, setCallIP] = useState(false)
   const [isLoading, setLoader] = useState(false)
 
   const handleConnect = () => {
     setLoader(true)
 
-    const connectionParam = {
-      chanelName: "test1",
-      uid: "1244"
-    }
+    // const connectionParam = {
+    //   chanelName: "test1",
+    //   uid: "1244"
+    // }
 
-  //   fetch("https://kapdemo.kapturecrm.com/ms/kreport/noauth/get-call-detail")
-  //   .then(res => res.json())
-  //   .then(connectionParam => 
-  // connectionParam
-  //   )
-
-    setTimeout(()=> {
-      setLoader(false)
-      setCallIP(true)
-     
-      popupCenter({url: `http://localhost:5173/via/${connectionParam.chanelName}/${connectionParam.uid}`, title: "KapCall - Real Time", w: 650, h: 500})
-
-     location.href = `https://webdemo.agora.io/basicVoiceCall/index.html?appid=3ce727a4f57d44ee889bf40e79e4ea5a&channel=${connectionParam.chanelName}&uid=${connectionParam.uid}`
+    fetch("https://kapdemo.kapturecrm.com/ms/kreport/noauth/get-call-detail")
+    .then(res => res.json())
+    .then(connectionParam => 
+      setTimeout(()=> {
+        setLoader(false)
+        // setCallIP(true)
       
-  
+        popupCenter({url: `https://voice-app-seven.vercel.app/via/${connectionParam.chanelName}/${connectionParam.uid}`, title: "KapCall - Real Time", w: 650, h: 500})
+
+        location.href = `https://webdemo.agora.io/basicVoiceCall/index.html?appid=3ce727a4f57d44ee889bf40e79e4ea5a&channel=${connectionParam.chanelName}&uid=${connectionParam.uid}`
+
     }, 4000)
+    )
+
+   
 
 
   }
@@ -91,11 +95,11 @@ export const ConnectForm = () => {
    
       <div className="card">
            <Tooltip title="Start Call" >
-                {  !isLoading && !callIP && 
-                        <IconButton className="connect-button-call" color="success" onClick={handleConnect}>
-                          <AddIcCallIcon fontSize='small'/>
-                        </IconButton> 
-                }
+           
+                <IconButton style={{ display: isLoading ? 'none' : 'flex' }} className="connect-button-call" color="success" onClick={handleConnect}>
+                  <AddIcCallIcon fontSize='small'/>
+                </IconButton> 
+                
           </Tooltip>
       </div>
     
