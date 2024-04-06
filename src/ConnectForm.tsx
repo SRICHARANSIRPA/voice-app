@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import CallLoading from './CallLoading'
+import { Button } from '@mui/material'
 
 interface ConnectFormProps {
   connectToVideo: (channelName: string, uid: number) => void
@@ -7,14 +8,10 @@ interface ConnectFormProps {
 
 export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
 
-  const [channelName, setChannelName] = useState('')
-  const [uid, setUid] = useState('')
+  // const [channelName, setChannelName] = useState('')
+  // const [uid, setUid] = useState('')
   const [isLoading, setLoader] = useState(false)
-  const [invalidInputMsg, setInvalidInputMsg] = useState('')
-
-
-
-   
+  // const [invalidInputMsg, setInvalidInputMsg] = useState('')
 
   const handleConnect = () => {
     // trim spaces
@@ -29,15 +26,15 @@ export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
     //   return;
     // } 
 
-    const connectionParam = {
-      "chanelName":"test",
-      "uid":12134
-    }
+    // const connectionParam = {
+    //   "chanelName":"test",
+    //   "uid":12134
+    // }
 
-    setTimeout(()=> {
-      setLoader(false)
-      connectToVideo(connectionParam.chanelName, connectionParam.uid)
-    }, 10000)
+    // setTimeout(()=> {
+    //   setLoader(false)
+    //   connectToVideo(connectionParam.chanelName, connectionParam.uid)
+    // }, 4000)
 
 
   }
@@ -66,7 +63,7 @@ export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
             setInvalidInputMsg('') // clear the error message
           }}
         /> */}
-         {  !isLoading && <button className="connect-button" onClick={handleConnect}>Connect Now</button> }
+         {  !isLoading && <Button variant="contained" color="success" onClick={handleConnect}>Connect Now</Button> }
         {/* { invalidInputMsg && <p style={{color: 'red'}}> {invalidInputMsg} </p>} */}
       </div>
      </>

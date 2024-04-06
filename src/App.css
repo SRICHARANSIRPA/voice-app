@@ -7,16 +7,8 @@ body {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #099DFD);
+  height: 100vh;
+  padding-top: 20vh;
 }
 
 .card {
@@ -127,3 +119,16 @@ body {
   vertical-align: middle;
   margin-right: 5px;
 }
+
+.disconnect-button-wrapper {
+  bottom: 0;
+}
+
+.disconnect-button {
+  border: solid 1px #ff0404 !important;
+  outline: none !important;
+  text-transform: capitalize !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+

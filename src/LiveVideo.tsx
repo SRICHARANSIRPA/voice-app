@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import ConversationIcon from './ConversationIcon'
+import CallEndIcon from '@mui/icons-material/CallEnd';
+
+// import MicIcon from '@mui/icons-material/Mic';
 
 import {
-    LocalUser,
+    // LocalUser,
     RemoteUser,
     useJoin,
 //     useLocalCameraTrack,
@@ -11,6 +15,7 @@ import {
     useRemoteAudioTracks,
     useRemoteUsers,
   } from "agora-rtc-react";
+import { Button } from "@mui/material";
 
 
 export const LiveVideo = () => {
@@ -53,6 +58,10 @@ export const LiveVideo = () => {
   // play the remote user audio tracks
   audioTracks.forEach((track) => track.play());
 
+  
+  const handleCloseWindow = () => {
+    window.close()
+  }
 
   return (
     <>
@@ -66,7 +75,11 @@ export const LiveVideo = () => {
           ))
         }
       </div>
-      <div id='localVideo'>
+      
+         <ConversationIcon />
+
+         
+      {/* <div id='localVideo'>
         <LocalUser
           audioTrack={localMicrophoneTrack}
       //     videoTrack={localCameraTrack}
@@ -76,26 +89,31 @@ export const LiveVideo = () => {
       //     playVideo={cameraOn}
           className=''
         />
-        <div>
+        <div> */}
           {/* media-controls toolbar component - UI controling mic, camera, & connection state  */}
-          <div id="controlsToolbar">
+          {/* <div id="controlsToolbar">
             <div id="mediaControls">
-              <button className="btn" onClick={() => setMic(a => !a)}>
-                Mic
-              </button>
-              {/* <button className="btn" onClick={() => setCamera(a => !a)}>
+              <IconButton className="btn" onClick={() => setMic(a => !a)}>
+                <MicIcon />
+              </IconButton>
+              <button className="btn" onClick={() => setCamera(a => !a)}>
                 Camera
-              </button> */}
+              </button>
             </div>
-            <button id="endConnection"
-                onClick={() => {
-                  setActiveConnection(false)
-                  navigate('/')
-                }}> Disconnect
-            </button>
+           
+            
           </div>
         </div>
-      </div>
+      </div> */}
+      <div className="disconnect-button-wrapper">
+            <Button variant="contained" className="disconnect-button" color="error"
+                onClick={() => {
+                  handleCloseWindow()
+                }}>
+                <CallEndIcon style={{paddingRight: "10px"}} />
+                Disconnect
+            </Button>
+         </div>
     </>
   )
 }
