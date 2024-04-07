@@ -16,7 +16,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={ <ConnectForm /> } />
-      <Route path='/via/:channelName/:uid' element={
+      <Route path='/via/:channelName/:uid/:rid/:sid/:ticketId/:flag' element={
         <AgoraRTCProvider client={agoraClient}>
           <LiveVideo />
         </AgoraRTCProvider>

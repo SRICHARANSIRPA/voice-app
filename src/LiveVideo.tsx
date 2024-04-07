@@ -22,7 +22,7 @@ export const LiveVideo = () => {
 
   const appId = 'e7f6e9aeecf14b2ba10e3f40be9f56e7'
   // const agoraEngine = useRTCClient( AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })); // Initialize Agora Client
-  const { channelName, uid } = useParams() //pull the channel name from the param
+  const { channelName, uid, rid, sid,ticketId,flag } = useParams() //pull the channel name from the param
 
   // set the connection state
   const [activeConnection, setActiveConnection] = useState(true);
@@ -59,31 +59,38 @@ export const LiveVideo = () => {
 
 
   const handleCloseWindow = () => {
+
     const params = {
-      "channel": localStorage.getItem("channel"),
-      "sid": localStorage.getItem("sid"),
-      "rid": localStorage.getItem("rid"),
-      "uid": localStorage.getItem("uid"),
-      "ticket_id": localStorage.getItem("ticket_id") 
-  }
-  console.log("params", params)
-  const options = {
-      headers: {
-          "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(params),
-  }
-    fetch("https://kapdemo.kapturecrm.com/ms/kreport/noauth/stop-call-recored",options)
-      .then(res => res.json())
-      .then(connectionParam => {
-          connectionParam
-          setActiveConnection(false)
-          window.close()
-          window.localStorage.clear();
-        }
-      )
-   
+      "channel": channelName,
+      "sid": sid,
+      "rid": rid,
+      "uid": uid,
+      "ticket_id": ticketId 
+    }
+    
+    
+
+      if(flag === "678") {
+          const options = {
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              method: "POST",
+              body: JSON.stringify(params),
+          }
+
+          fetch("https://kapdemo.kapturecrm.com/ms/kreport/noauth/stop-call-recored", options)
+            .then(res => res.json())
+            .then(connectionParam => {
+                console.log(connectionParam)
+                setActiveConnection(false)
+                window.close()
+                window.localStorage.clear();
+              }
+            )
+      } else {
+        alert("You are not allowed to perform this action")
+      }
   }
 
   return (
@@ -134,7 +141,7 @@ export const LiveVideo = () => {
       </div> */}
       <div className="disconnect-button-wrapper">
         <Button variant="contained" className="disconnect-button" color="error"
-          onClick={() => { handleCloseWindow() }}>
+          onClick={handleCloseWindow}>
           <CallEndIcon style={{ paddingRight: "10px" }} />
           Disconnect
         </Button>
