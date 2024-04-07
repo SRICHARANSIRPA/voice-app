@@ -16,7 +16,7 @@ import {
   useRemoteAudioTracks,
   useRemoteUsers,
 } from "agora-rtc-react";
-import { Button, CircularProgress, IconButton, Typography } from "@mui/material";
+import { Button, IconButton, Typography } from "@mui/material";
 
 
 export const LiveVideo = () => {
