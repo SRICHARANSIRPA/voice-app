@@ -6,15 +6,15 @@ import CallEndIcon from '@mui/icons-material/CallEnd';
 import MicIcon from '@mui/icons-material/Mic';
 
 import {
-    // LocalUser,
-    // RemoteUser,
-    useJoin,
-//     useLocalCameraTrack,
-    useLocalMicrophoneTrack,
-    usePublish,
-    useRemoteAudioTracks,
-    useRemoteUsers,
-  } from "agora-rtc-react";
+  // LocalUser,
+  // RemoteUser,
+  useJoin,
+  //     useLocalCameraTrack,
+  useLocalMicrophoneTrack,
+  usePublish,
+  useRemoteAudioTracks,
+  useRemoteUsers,
+} from "agora-rtc-react";
 import { Button, IconButton } from "@mui/material";
 
 
@@ -29,13 +29,13 @@ export const LiveVideo = () => {
 
   // track the mic/video state - Turn on Mic and Camera On
   const [micOn, setMic] = useState(true);
-//   const [cameraOn, setCamera] = useState(true);
+  //   const [cameraOn, setCamera] = useState(true);
 
   // get local video and mic tracks
   const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
-//   const { localCameraTrack } = useLocalCameraTrack(cameraOn);
+  //   const { localCameraTrack } = useLocalCameraTrack(cameraOn);
 
-  
+
 
   // Join the channel
   useJoin(
@@ -57,15 +57,33 @@ export const LiveVideo = () => {
   // play the remote user audio tracks
   audioTracks.forEach((track) => track.play());
 
-  
+
   const handleCloseWindow = () => {
-    // fetch("https://kapdemo.kapturecrm.com/ms/kreport/noauth/get-call-detail")
-    // .then(res => res.json())
-    // .then(connectionParam => 
-    //   connectionParam
-    // )
-    setActiveConnection(false)
-    window.close()
+    const params = {
+      "channel": localStorage.getItem("channel"),
+      "sid": localStorage.getItem("sid"),
+      "rid": localStorage.getItem("rid"),
+      "uid": localStorage.getItem("uid"),
+      "ticket_id": localStorage.getItem("ticket_id") 
+  }
+  console.log("params", params)
+  const options = {
+      headers: {
+          "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(params),
+  }
+    fetch("https://kapdemo.kapturecrm.com/ms/kreport/noauth/stop-call-recored",options)
+      .then(res => res.json())
+      .then(connectionParam => {
+          connectionParam
+          setActiveConnection(false)
+          window.close()
+          window.localStorage.clear();
+        }
+      )
+   
   }
 
   return (
@@ -80,14 +98,14 @@ export const LiveVideo = () => {
           ))
         }
       </div> */}
-      
-         <ConversationIcon />
 
-         <div id="mediaControls">
-              <IconButton style={localMicrophoneTrack ? {color: "#139905", outline: "none"} :  {color: "#959595", outline: "none"}} onClick={() => setMic(a => !a)}>
-                <MicIcon />
-              </IconButton>
-         </div>
+      <ConversationIcon />
+
+      <div id="mediaControls">
+        <IconButton style={localMicrophoneTrack ? { color: "#139905", outline: "none" } : { color: "#959595", outline: "none" }} onClick={() => setMic(a => !a)}>
+          <MicIcon />
+        </IconButton>
+      </div>
       {/* <div id='localVideo'>
         <LocalUser
           audioTrack={localMicrophoneTrack}
@@ -99,8 +117,8 @@ export const LiveVideo = () => {
           className=''
         />
         <div> */}
-          {/* media-controls toolbar component - UI controling mic, camera, & connection state  */}
-          {/* <div id="controlsToolbar">
+      {/* media-controls toolbar component - UI controling mic, camera, & connection state  */}
+      {/* <div id="controlsToolbar">
             <div id="mediaControls">
               <IconButton className="btn" onClick={() => setMic(a => !a)}>
                 <MicIcon />
@@ -115,12 +133,12 @@ export const LiveVideo = () => {
         </div>
       </div> */}
       <div className="disconnect-button-wrapper">
-            <Button variant="contained" className="disconnect-button" color="error"
-                onClick={() => { handleCloseWindow() }}>
-                <CallEndIcon style={{paddingRight: "10px"}} />
-                Disconnect
-            </Button>
-         </div>
+        <Button variant="contained" className="disconnect-button" color="error"
+          onClick={() => { handleCloseWindow() }}>
+          <CallEndIcon style={{ paddingRight: "10px" }} />
+          Disconnect
+        </Button>
+      </div>
     </>
   )
 }
