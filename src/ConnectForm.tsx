@@ -43,6 +43,10 @@ const popupCenter = ({ url, title, w, h } : { url: string, title: string, w: num
     top=${top}, 
     left=${left},
     resizable=no,
+    status=no,
+    toolbar=no,
+    menubar=no,
+    location=no
     `,
 
   );

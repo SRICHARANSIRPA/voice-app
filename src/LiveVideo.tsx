@@ -4,6 +4,7 @@ import ConversationIcon from './ConversationIcon'
 import CallEndIcon from '@mui/icons-material/CallEnd';
 
 import MicIcon from '@mui/icons-material/Mic';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 import {
   // LocalUser,
@@ -15,7 +16,7 @@ import {
   useRemoteAudioTracks,
   useRemoteUsers,
 } from "agora-rtc-react";
-import { Button, IconButton } from "@mui/material";
+import { Button, CircularProgress, IconButton, Typography } from "@mui/material";
 
 
 export const LiveVideo = () => {
@@ -29,6 +30,8 @@ export const LiveVideo = () => {
 
   // track the mic/video state - Turn on Mic and Camera On
   const [micOn, setMic] = useState(true);
+
+  const [isLoading, setLoader] = useState(false)
   //   const [cameraOn, setCamera] = useState(true);
 
   // get local video and mic tracks
@@ -60,6 +63,8 @@ export const LiveVideo = () => {
 
   const handleCloseWindow = () => {
 
+    setLoader(true)
+
     const params = {
       "channel": channelName,
       "sid": sid,
@@ -71,6 +76,7 @@ export const LiveVideo = () => {
     
 
       if(flag === "678") {
+        
           const options = {
               headers: {
                   "Content-Type": "application/json",
@@ -84,8 +90,8 @@ export const LiveVideo = () => {
             .then(connectionParam => {
                 console.log(connectionParam)
                 setActiveConnection(false)
+                setLoader(false)
                 window.close()
-                window.localStorage.clear();
               }
             )
       } else {
@@ -139,13 +145,28 @@ export const LiveVideo = () => {
           </div>
         </div>
       </div> */}
-      <div className="disconnect-button-wrapper">
-        <Button variant="contained" className="disconnect-button" color="error"
-          onClick={handleCloseWindow}>
-          <CallEndIcon style={{ paddingRight: "10px" }} />
-          Disconnect
-        </Button>
-      </div>
+
+      { flag === "678" ?
+          <div className="disconnect-button-wrapper">
+            <Button variant="contained" className="disconnect-button" color="error"
+              onClick={handleCloseWindow}>
+                { isLoading ?  
+                    <>
+                      Disconnecting...
+                    </> : (
+                    <>
+                      <CallEndIcon style={{ paddingRight: "10px" }} />
+                      Disconnect
+                    </>
+                )}
+            </Button>
+          </div>
+          : 
+          <Typography style={{color: "#416D19", fontSize: "15px", fontWeight: "600", alignItems: "center", display: "flex"}}>
+              <TaskAltIcon style={{paddingRight: "10px" , fontSize: "40px", color: "#416D19"}}/> Connected with Kapture Support
+          </Typography>
+      }
+
     </>
   )
 }
