@@ -70,7 +70,7 @@ export const LiveVideo = () => {
 
   return (
     <>
-      <div id='remoteVideoGrid'>
+      {/* <div id='remoteVideoGrid'>
         { 
           // Initialize each remote stream using RemoteUser component
           remoteUsers.map((user) => (
@@ -79,7 +79,7 @@ export const LiveVideo = () => {
             </div>
           ))
         }
-      </div>
+      </div> */}
       
          <ConversationIcon />
 
