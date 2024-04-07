@@ -71,15 +71,15 @@ export const ConnectForm = () => {
     // }
 
     fetch("https://kapdemo.kapturecrm.com/ms/kreport/noauth/get-call-detail")
-    .then(res => res.json())
-    .then(connectionParam => {
-      setLoader(false)
-      // setCallIP(true)
-    
-      popupCenter({url: `https://voice-app-seven.vercel.app/via/${connectionParam.chanelName}/${connectionParam.uid}`, title: "KapCall - Real Time", w: 650, h: 500})
+      .then(res => res.json())
+          .then(connectionParam => {
+            setLoader(false)
+            // setCallIP(true)
+          
+            popupCenter({url: `https://voice-app-seven.vercel.app/via/${connectionParam.chanelName}/${connectionParam.uid}`, title: "KapCall - Real Time", w: 650, h: 500})
 
-      location.href = `https://webdemo.agora.io/basicVoiceCall/index.html?appid=3ce727a4f57d44ee889bf40e79e4ea5a&channel=${connectionParam.chanelName}&uid=${connectionParam.uid}`
-    }
+            location.href = `https://webdemo.agora.io/basicVoiceCall/index.html?appid=3ce727a4f57d44ee889bf40e79e4ea5a&channel=${connectionParam.chanelName}&uid=${connectionParam.uid}`
+          }
     )
 
    
