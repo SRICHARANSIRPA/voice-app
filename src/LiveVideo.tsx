@@ -91,7 +91,7 @@ export const LiveVideo = () => {
                 console.log(connectionParam)
                 // setActiveConnection(false)
                 setLoader(false)
-                // window.close()
+                window.close()
               }
             )
       } else {
