@@ -91,7 +91,7 @@ export const LiveVideo = () => {
                 console.log(connectionParam)
                 // setActiveConnection(false)
                 setLoader(false)
-                window.close()
+                // window.close()
               }
             )
       } else {
@@ -115,7 +115,7 @@ export const LiveVideo = () => {
       <ConversationIcon />
 
       <div id="mediaControls">
-        <IconButton style={localMicrophoneTrack ? { color: "#139905", outline: "none" } : { color: "#959595", outline: "none" }} onClick={() => setMic(a => !a)}>
+        <IconButton style={{ color: "#139905", outline: "none" }} onClick={() => setMic(a => !a)}>
           <MicIcon />
         </IconButton>
       </div>
