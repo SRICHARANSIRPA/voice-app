@@ -82,7 +82,7 @@ export const ConnectForm = () => {
           
             popupCenter({url: `https://voice-app-seven.vercel.app/via/${connectionParam.chanelName}/${connectionParam.uid}/_/_/_/_/`, title: "KapCall - Real Time", w: 650, h: 500})
 
-            location.href = `https://webdemo.agora.io/basicVoiceCall/index.html?appid=3ce727a4f57d44ee889bf40e79e4ea5a&channel=${connectionParam.chanelName}&uid=${connectionParam.uid}`
+            location.href = `https://webdemo.agora.io/basicVoiceCall/index.html?appid=02e71be652c7402797cb26762cb4114d&channel=${connectionParam.chanelName}&uid=${connectionParam.uid}`
           }
     )
 

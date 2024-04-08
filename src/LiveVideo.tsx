@@ -9,10 +9,10 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import {
   // LocalUser,
   // RemoteUser,
-  useJoin,
+  // useJoin,
   //     useLocalCameraTrack,
   useLocalMicrophoneTrack,
-  usePublish,
+  // usePublish,
   useRemoteAudioTracks,
   useRemoteUsers,
 } from "agora-rtc-react";
@@ -21,12 +21,12 @@ import { Button, IconButton, Typography } from "@mui/material";
 
 export const LiveVideo = () => {
 
-  const appId = 'e7f6e9aeecf14b2ba10e3f40be9f56e7'
+  // const appId = '02e71be652c7402797cb26762cb4114d'
   // const agoraEngine = useRTCClient( AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })); // Initialize Agora Client
   const { channelName, uid, rid, sid,ticketId,flag } = useParams() //pull the channel name from the param
 
   // set the connection state
-  const [activeConnection, setActiveConnection] = useState(true);
+  // const [activeConnection, setActiveConnection] = useState(true);
 
   // track the mic/video state - Turn on Mic and Camera On
   const [micOn, setMic] = useState(true);
@@ -41,17 +41,17 @@ export const LiveVideo = () => {
 
 
   // Join the channel
-  useJoin(
-    {
-      appid: appId,
-      channel: channelName!,
-      token: null,
-      uid: parseInt(uid || '')
-    },
-    activeConnection,
-  );
+  // useJoin(
+  //   {
+  //     appid: appId,
+  //     channel: channelName!,
+  //     token: null,
+  //     uid: parseInt(uid || '')
+  //   },
+  //   activeConnection,
+  // );
 
-  usePublish([localMicrophoneTrack]);
+  // usePublish([localMicrophoneTrack]);
 
   //remote users
   const remoteUsers = useRemoteUsers();
@@ -89,9 +89,9 @@ export const LiveVideo = () => {
             .then(res => res.json())
             .then(connectionParam => {
                 console.log(connectionParam)
-                setActiveConnection(false)
+                // setActiveConnection(false)
                 setLoader(false)
-                // window.close()
+                window.close()
               }
             )
       } else {
