@@ -12,7 +12,7 @@ import {
   // useJoin,
   //     useLocalCameraTrack,
   useLocalMicrophoneTrack,
-  // usePublish,
+  usePublish,
   useRemoteAudioTracks,
   useRemoteUsers,
 } from "agora-rtc-react";
@@ -51,7 +51,7 @@ export const LiveVideo = () => {
   //   activeConnection,
   // );
 
-  // usePublish([localMicrophoneTrack]);
+  usePublish([localMicrophoneTrack]);
 
   //remote users
   const remoteUsers = useRemoteUsers();
