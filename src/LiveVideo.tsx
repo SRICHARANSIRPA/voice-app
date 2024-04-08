@@ -160,6 +160,7 @@ export const LiveVideo = () => {
                     </>
                 )}
             </Button>
+            <a style={{ padding: "10px 0", fontSize: "15px", fontWeight: "500", color: "#333333"}}href={`https://kapdemo.kapturecrm.com/nui/tickets/assigned_to_me/5/-1/0/detail//${ticketId}`}>Open Ticket</a>
           </div>
           : 
           <Typography style={{color: "#416D19", fontSize: "15px", fontWeight: "600", alignItems: "center", display: "flex"}}>
